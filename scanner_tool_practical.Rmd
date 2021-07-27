@@ -1,0 +1,58 @@
+---
+title: "Scanner tool for SuS: Revolutions in Biomedicine"
+author: "Olivia Boyd"
+date: "27/07/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Monitoring emerging variants
+
+As part of the UK pandemic response, we develop methods to identify and monitor emerging variants of interest. Your job today is to look at clusters of interest, including specific lineages or lineage and mutation combinations, and report on growth rates. We wil look at outputs from the scanning tool designed for PHE to monitor emerging variants of interest or concern. 
+
+
+For today, PHE has requested a situation report on the top 5 growth clusters of interest, as well as clusters associated to mutations S:L452R and S:Q677H. This report should be about three pages in length, and include figures from the scanning tool as part of the report. **N.B** _You will include this report as part of the summative SuS Revolutions in Biomedicine portfolio. You are not expected to complete this report in the practical period, so please take the time to discuss outputs with your classmates as you work through the practical together._
+
+Table 1. provides a reference of lineages of interest or concern that you should consider looking at in the scanner outputs. Please note, all scanner outputs utlise the PANGO lineage nomenclature. 
+
+
+
+Figure 1 shows growth rates for all clusters in the most recent scanner run, with date of last sample from the cluster of interest on the x axis. Although there are quite a few clusters on the page, notice that we can toggle clusters with specific lineages on and off. Although clusters can contain more than one lineage, we identify which lineage is most prominent in a cluster and label a cluster as lineage +. Questions to consider when looking at growth rates between clusters. Which clusters show the highest growth rates? How late are the sample dates? Do we see clusters with high growth rates but no recent samples included in the cluster? 
+
+
+
+
+Specifically, what do we see happening with B.1.1.7 and B.1.617.2? B.1.1.7 has been the dominant lineage in circulation since the start of the pandemic. How large (number of sequences) are the clusters for lineages of interest? 
+
+
+
+
+
+
+
+
+
+
+
+
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
