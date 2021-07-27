@@ -6,24 +6,32 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(plotly)
+library(lubridate)
+
+ygr1 = read.csv("C:/Users/oboyd/Documents/ygr1_check2.csv")
+
 ```
+
 
 ## Monitoring emerging variants
 
 As part of the UK pandemic response, we develop methods to identify and monitor emerging variants of interest. Your job today is to look at clusters of interest, including specific lineages or lineage and mutation combinations, and report on growth rates. We wil look at outputs from the scanning tool designed for Public Health England (PHE) as part of the SARS-CoV-2 pandemic response to monitor emerging variants of interest or concern. 
 
-#### PHE situation report
+### PHE situation report
 
-Imagine the date is the 28th of May, 2021. PHE has requested a situation report on the top 20 growth clusters of interest, as well as clusters associated to mutations **S:L452R**, **S:K417N**, and **S:Q677H**. This report should be about three pages in length, and include figures or tables from the scanning tool as part of the report. Factors to consider when writing your report: 
+Imagine the date is the 28th of May, 2021. PHE has requested a situation report on the top 5 growth clusters of interest, on the growth rates of B.1.617.2 in the country as this is a new VOC, as well as clusters associated with mutations **S:L452R** and **S:K417N**. This report should be about three pages in length, and include a few figures or tables from the scanning tool as part of the report. Factors to consider when writing your report: 
 
 1. Which lineages are the highest growth rate lineages? 
-2. Where are these lineages occuring in the population? (Use google maps to look up UK locations if uncertain)
+2. Where are these lineages occuring in the population? (Use [google maps](https://www.google.co.uk/maps/place/United+Kingdom/@54.2184924,-13.4306024,5z/data=!3m1!4b1!4m5!3m4!1s0x25a3b1142c791a9:0xc4f8a0433288257a!8m2!3d55.378051!4d-3.435973) to look up UK locations if uncertain)
 3. How does their growth look over time? What about their frequency? How many LTLAs do we see them in? 
 4. How do age distributions look in these lineages of interest? 
 5. What about vaccinations? What information do we have on vaccinations?
 6. Do we see any mutations of interest or concern (to be discussed further in the mutations section below)? 
-7. How might current non-pharmaceutical interventions impact growth rates (remember the date is 28/05/2021)? 
+7. How might current non-pharmaceutical interventions impact growth rates (remember the date is [28/05/2021](https://www.gov.uk/government/publications/covid-19-response-spring-2021/covid-19-response-spring-2021-summary) so the so called ["freedom day"](https://www.nbcnews.com/news/world/freedom-day-england-prepares-reopen-despite-skyrocketing-covid-cases-n1274311) has not occured yet)? 
 
+Additionally, remember that we are only including P1 (lighthouse) samples in our scanning tool and outputs. This is always good to mention. Why? Because sampling from certain populations can lead to sample bias in our results. **Discuss with your classmates how we might bias our results if we included hospital cases in our scanner tool.** 
 
 _**N.B** You will include this report as part of the summative SuS Revolutions in Biomedicine portfolio. You are not expected to complete this report in the practical period, so please take the time to discuss outputs with your classmates as you work through the practical together._
 
@@ -35,17 +43,31 @@ Table 1. provides a reference of lineages of interest or concern that you should
 
 <div style="text-align:center"><img src="C:/Users/oboyd/Documents/table1.png" /></div>
 <p>&nbsp;</p>
+<p>&nbsp;</p>
 
 
+### Growth rates from scanner output
 
-#### Growth rates from scanner output
-
-Figure 1 shows growth rates for all clusters in the most recent scanner run, with date of last sample from the cluster of interest on the x axis. Although there are quite a few clusters on the page, notice that we can toggle clusters with specific lineages on and off. Although clusters can contain more than one lineage, we identify which lineage is most prominent in a cluster and label a cluster as lineage +. Questions to consider when looking at growth rates between clusters. Which clusters show the highest growth rates? How late are the sample dates? Do we see clusters with high growth rates but no recent samples included in the cluster? 
-
+We first look at growth rates for all clusters in the most recent scanner run, with date of last sample from the cluster of interest on the x axis. Although there are quite a few clusters on the image, notice that we can toggle clusters with specific lineages on and off the figure by clicking on a lineage in the legend. Although clusters can (and generally do) contain more than one lineage, we identify which lineage is most prominent in a cluster and label a cluster as "lineage +".
 
 
+```{r figure1, echo=FALSE}
 
-Specifically, what do we see happening with B.1.1.7 and B.1.617.2? B.1.1.7 has been the dominant lineage in circulation since the start of the pandemic. How large (number of sequences) are the clusters for lineages of interest? 
+ygr1$most_recent_tip = dmy(ygr1$most_recent_tip)
+p = ggplot(ygr1) + geom_point(aes(x = most_recent_tip, logistic_growth_rate, color = lineage, size = cluster_size))  +
+  theme_bw() + labs(color = "", size = "", x = "Most recent sample date", y = "Relative growth rate per generaton")
+
+ggplotly(p)
+
+```
+
+
+Questions to consider when looking at growth rates between clusters: 
+
+Which clusters show the highest growth rates? What lineages do they include? How recent are teh sample dates? Do we see clusters with higher growth rates but less recent samples? Specifically, what do we see happening with B.1.1.7 and B.1.617.2? B.1.1.7 has been the dominant lineage in circulation since the start of the pandemic. However, B.1.617.2 has recently shown potential transmission advantage. How large (number of sequences) are the clusters for B.1.617.2, B.1.617.2+ and B.1.1.7? Where do we see the largest 
+B.1.1.7 clusters? 
+
+
 
 
 
