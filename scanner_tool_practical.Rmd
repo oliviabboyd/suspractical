@@ -23,15 +23,15 @@ As part of the UK pandemic response, we develop methods to identify and monitor 
 
 ### PHE situation report
 
-Imagine the date is the 28th of May, 2021. PHE has requested a situation report on the top growth clusters of interest, and more specifically on the top growth rates of B.1.617.2 in the country as this is a new VOC, as well as clusters associated with mutations **S:L452R** and **S:K417N**. Feel free to include any other information about VUI/VOC of interest (see Table 1). This report should be about three pages in length, and include a few figures or tables from the scanning tool as part of the report. Factors to consider when writing your report: 
+Imagine the date is the 28th of May, 2021. PHE has requested a situation report on the top growth clusters of interest, and more specifically on the top growth rates of B.1.617.2 in the country as this is a relatively newly emerged VOC, as well as clusters associated with mutations **S:L452R** and **S:K417N**. Feel free to include any other information about VUI/VOC of interest (see Table 1). This report should be about three pages in length, and include a few figures or tables from the scanning tool as part of the report. Factors to consider when writing your report: 
 
-1. Which lineages are the highest growth rate lineages? 
+1. Which lineages are the highest growth rate lineages? How large are these clusters?
 2. Where are these lineages occuring in the population? (Use [google maps](https://www.google.co.uk/maps/place/United+Kingdom/@54.2184924,-13.4306024,5z/data=!3m1!4b1!4m5!3m4!1s0x25a3b1142c791a9:0xc4f8a0433288257a!8m2!3d55.378051!4d-3.435973) to look up UK locations if uncertain)
 3. How does their growth look over time? What about their frequency? How many LTLAs do we see them in? 
 4. Do we see any mutations of interest or concern with high growth (to be discussed further in the mutations section below)? 
-5. How might current non-pharmaceutical interventions impact growth rates (remember the date is [28/05/2021](https://www.gov.uk/government/publications/covid-19-response-spring-2021/covid-19-response-spring-2021-summary) so the so called ["freedom day"](https://www.nbcnews.com/news/world/freedom-day-england-prepares-reopen-despite-skyrocketing-covid-cases-n1274311) has not occured yet)? 
+5. How might current non-pharmaceutical interventions impact growth rates (remember the date is [28/05/2021](https://www.gov.uk/government/publications/covid-19-response-spring-2021/covid-19-response-spring-2021-summary) so the so called ["freedom day"](https://www.nbcnews.com/news/world/freedom-day-england-prepares-reopen-despite-skyrocketing-covid-cases-n1274311) has not occured yet)? How might novel introductions or importations into the UK impact growth rates? 
 
-Additionally, remember that we are only including P1 (lighthouse) samples in our scanning tool and outputs. This is always good to mention. Why? Because different sampling methods can lead to sample bias in our results. **Discuss with your classmates how we might bias our results if we included hospital cases in our scanner tool.** 
+Additionally, remember that we are only including P1 (lighthouse or community) samples in our scanning tool and outputs. This is always good to mention. Why? Because different sampling methods can lead to sample bias in our results. **Recap and discuss with your classmates how we might bias our results if we included hospital cases along with lighthouse (community samples) in our scanner tool.** 
 
 _**N.B** You will include this report as part of the summative SuS Revolutions in Biomedicine portfolio. You are not expected to complete this report in the practical period, so please take the time to discuss outputs with your classmates as you work through the practical together._
 
@@ -48,12 +48,13 @@ Table 1. provides a reference of lineages of interest or concern that you should
 
 ### Growth rates from scanner output
 
-We first look at growth rates for all clusters in the most recent scanner run, with date of last sample from the cluster of interest on the x axis. Although there are quite a few clusters on the image, notice that we can toggle clusters with specific lineages on and off the figure by clicking on a lineage in the legend. Although clusters can (and generally do) contain more than one lineage, we identify which lineage is most prominent in a cluster and label a cluster as "lineage +". Notice the graph has lots of functional features, including zooming in and selecting specific regions of the plot. For example, use box select to look at only clusters with a most recent sample date between May 01 and May 15. You can download the plot as a png as well. 
+We first look at growth rates for all clusters in the most recent scanner run, with date of last sample from the cluster of interest on the x axis. Although there are quite a few clusters on the image, notice that we can toggle clusters with specific lineages on and off the figure by clicking on a lineage in the legend. Although clusters can (and generally do) contain more than one lineage, we identify which lineage is most prominent in a cluster and label a cluster as "lineage +". Notice the graph has lots of functional features, including zooming in and selecting specific regions of the plot. For example, use box select to look at only clusters with a most recent sample date between May 01 and May 17. You can download the plot as a png as well for your report, with lineages toggled on or off, as well as being zoomed in or out of the report. 
 
 
 ```{r figure1, echo=FALSE}
 
 ygr1$most_recent_tip = dmy(ygr1$most_recent_tip)
+ygr1$logistic_growth_rate = as.numeric(format(round(ygr1$logistic_growth_rate, 2), nsmall = 2))
 p = ggplot(ygr1) + geom_point(aes(x = most_recent_tip, logistic_growth_rate, color = lineage, size = cluster_size))  +
   theme_bw() + labs(color = "", size = "", x = "Most recent sample date", y = "Relative growth rate per generaton")
 
@@ -62,22 +63,23 @@ ggplotly(p)
 ```
 
 
-Questions to consider and discuss with your classmates when looking at growth rates between clusters: 
+**Questions to consider and discuss with your classmates:**
 
 Which clusters show the highest growth rates? What lineages do they include? How recent are the sample dates? Do we see clusters with higher growth rates but less recent samples? More specifically, what do we see happening with B.1.1.7 and B.1.617.2? B.1.1.7 has been the dominant lineage in circulation since the start of the pandemic. However, B.1.617.2 has recently shown potential transmission advantage. How large (number of sequences) are the clusters for B.1.617.2, B.1.617.2+ and B.1.1.7? Where do we see the largest 
 B.1.1.7 clusters? Where do we see the largest B.1.617.2 clusters? What do these findings suggest to you as an epidemiologist? 
 
 ### Growth rates over time
 
-Next, we look at a selection of scanner runs (April 01 - May 17, 2021) and lineages of interest over time, to see how growth rate estimates have changed with the emergence of lineages of interest. It is important to consider how growth rates change over time, as it is possible clusters misappear to have high growth due multiple introductions or importations into the circulating population from the international reservoir. **Discuss why this would bias growth estimates with your classmates and consider when B.1.617.2 is thought to have been first introduced into the UK population in your discussion**. 
+Next, we look at a selection of scanner runs (April 01 - May 17, 2021) and lineages of interest over time, to see how growth rate estimates have changed with the emergence of lineages of interest. It is important to consider how growth rates change over time, as it is possible clusters misappear to have high growth due multiple introductions or importations into the circulating population from the international reservoir. **Discuss why this would bias growth estimates with your classmates** and consider when B.1.617.2 is thought to have been first introduced into the UK population in your discussion. 
 
 This figure shows B.1.1.7, B.1.351, B.1.525, B.1.617.2 and C.36 scanner growth rate estimates from multiple scanner runs. 
 
 
 
-```{r figure2, echo = FALSE}
+```{r figure2, echo = FALSE, warning=FALSE}
 
 all_in$lineage = all_in$lineage2
+all_in$logistic_growth_rate = as.numeric(format(round(all_in$logistic_growth_rate, 2), nsmall = 2))
 p2 = ggplot(all_in[all_in$most_recent_tip > ymd("2021-04-01") & !is.na(all_in$lineage) & all_in$min_size != "min = 10",]) + geom_point(aes(most_recent_tip, logistic_growth_rate, 
                                  color = lineage,
                                 size = cluster_size
@@ -96,9 +98,113 @@ ggplotly(p2)
 
 ```
 
-Discuss with your classmates what this output suggests in terms of growth for different VOC/VUI shown. Remember to again consider things such as cluster size, most recent sample date, and non-pharmaceutical interventions that might have been in place at diferent times in the outbreak. As a reference point, during peak of the second wave (~ Jan 2021) when the UK was in lockdown, a relative growth rate per generation of 0.2 or greater was considerd to be a high growth rate (with in the top 5 growth clusters). Referring back to the previous figure, consider where the highest growth clusters are now in terms of growth rate. 
+**Questions to consider and discuss with your classmates** 
+
+What does this output suggests in terms of growth for different VOC/VUI shown over time? Remember to again consider things such as cluster size, most recent sample date, potential time of importations or introduction in the population, and non-pharmaceutical interventions that might have been in place at diferent times in the outbreak period shown. As a reference point, during peak of the second wave (~ Jan 2021) when the UK was in lockdown, a relative growth rate per generation of 0.2 or greater was considerd to be a high growth rate (within the top 5 growth clusters). Referring back to the previous two figures, consider where the highest growth clusters are now in terms of growth rate for comparison. What does this suggest about the outbreak overall?
+
+### Frequency, geo-matched growth and regions
+
+Returning to the outputs from our most recent scanner run, we can further look at frequency, geographically matched growth rate estimates (using a GAM) and number of regions (lower tier local authority, LTLA). We match our comparison samples to our clusters based on time and LTLA. We look at the top 3 growth clusters for B.1.1.7 and B.1.617.2 respectively, excluding samples where the most recent sample date is earlier than 01/05/2021. Table 2 shows a recap of these clusters, including cluster size, most recent sample date, least recent sample date, and logistic growth rate from scanner output. 
+
+<div style="text-align:center"><img src="C:/Users/oboyd/Documents/table22.png" /></div>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+The figures below show the estimated and empirical sample frequency of the lineage cluster groups and geographic range of time. Column A shows the frequency of cluster (blue line) estimated with a GAM and a Gaussian process model for changes in time. The shaded region shows the 95% confidence interval for the observation if sampling is binomial. Points show the empirical VUI frequency on each day with size of points related to number of samples. Frequency of the cluster is estimated relative to subset of non-cluster samples from the same set of LTLAs as where the cluster has been observed. Thus, the estimate does not represent VUI/VOC prevalence in England as a whole, but rather in regions where the cluster is present. Column B reflects A but with logit transformation. Column C shows the number of LTLAs where the cluster has been observed (sampled at least once) over time. Note variation in sample period (x axises) and estimates (y axises).  
+
+<p>&nbsp;</p>
 
 
+##### B.1.1.7, logistic growth rate = 0.93 
+
+<div style="text-align:center"><img src="C:/Users/oboyd/Documents/cluster1_linreport.png" /></div>
+
+##### B.1.1.7, logistic growth rate = 0.61
+
+<div style="text-align:center"><img src="C:/Users/oboyd/Documents/cluster2_linreport.png" /></div>
+  
+##### B.1.1.7, logistic growth rate = 0.27 
+  
+<div style="text-align:center"><img src="C:/Users/oboyd/Documents/cluster3_linreport.png" /></div>
+  
+##### B.1.617.2, logistic growth rate = 0.92
+  
+<div style="text-align:center"><img src="C:/Users/oboyd/Documents/cluster4_linreport.png" /></div>
+  
+##### B.1.617.2, logistic growth rate = 0.39 
+  
+<div style="text-align:center"><img src="C:/Users/oboyd/Documents/cluster5_linreport.png" /></div>
+  
+##### B.1.617.2, logistic growth rate = 0.28 
+  
+<div style="text-align:center"><img src="C:/Users/oboyd/Documents/cluster6_linreport.png" /></div>
+
+<p>&nbsp;</p>
+
+
+**Questions to consider and discuss with your classmates:** 
+
+Which clusters show the highest frequency and geo-matched growth? How does this compare to the scanner relative growth rate estimates as reported in Table 2 or in the first figure? What could make a cluster appear to have a high growth rate in the scanner tool, even if it is only present in <10 LTLAs? How do we identify this in these scanner outputs, and what other metadata (if any) could we use to more accurately identify this? 
+
+
+### Frequency by LTLA
+
+We finally look at frequency by LTLA, based on a GAM + Gaussian markov random field model. Don't worry too much about the statistics, but consider where our clusters of interest are appearing in the population. By using a predictive model for spatial growth, this can help inform NHS test and trace where to increase testing initiatives, as well as help PHE identify regions of concern for transmission. 
+
+The figures below show estimated lineage frequency between LTLAs and over epidemiological weeks, where epi week 1 is the first week of the year. VUI frequency is estimated using a GAM model and additionally including a model of spatial correlation between neighbouring LTLAs to smooth estimates over sparse observations. Estimates are based on a single cluster of interest. Note scale and epi week vary by cluster shown. 
+
+<p>&nbsp;</p>
+
+##### B.1.1.7, logistic growth rate = 0.93 
+
+<div style="text-align:center"><img src="C:/Users/oboyd/Documents/cluster1_mapreport.png" /></div>
+
+##### B.1.1.7, logistic growth rate = 0.61
+
+<div style="text-align:center"><img src="C:/Users/oboyd/Documents/cluster2_mapreport.png" /></div>
+
+##### B.1.1.7, logistic growth rate = 0.27 
+
+<div style="text-align:center"><img src="C:/Users/oboyd/Documents/cluster3_mapreport.png" /></div>
+
+##### B.1.617.2, logistic growth rate = 0.92
+
+<div style="text-align:center"><img src="C:/Users/oboyd/Documents/cluster4_mapreport.png" /></div>
+
+##### B.1.617.2, logistic growth rate = 0.39 
+
+<div style="text-align:center"><img src="C:/Users/oboyd/Documents/cluster5_mapreport.png" /></div>
+
+##### B.1.617.2, logistic growth rate = 0.28 
+
+<div style="text-align:center"><img src="C:/Users/oboyd/Documents/cluster6_mapreport.png" /></div>
+
+<p>&nbsp;</p>
+
+
+**Questions to consider and discuss with your classmates:** 
+
+Why would certain areas in the population have higher transmission than others? Which epidemiological factors do we need to consider when thinking about variation in transmission between regions? Where are these clusters of interest occuring? Do specific lineages appear to be more localised? Do specific lineages appear to be very spread out? What are the conotations of a fast growing cluster appearing in multiple locations across the UK? If you combined the clusters from each lineage respectively onto one figure, how wide spread would these B.1.1.7 vs. B.1.617.2 clusters appear by epi week 18 or 19? Do these frequency maps give any suggestion as to where B.1.617.2 was likely to have been introduced at origin? 
+
+<p>&nbsp;</p>
+
+
+### Mutations of interest 
+
+For the case of this practical, and our PHE report, we are specifically interested in S:L452R and S:K417N. S:L452R is a spike protein mutation, which increases the virus's binding affinity for ACE2. This mutation has also been found to likely enhance viral infectivity by increasing the stability of the S protein, further enhancing viral replication. This mutation is found on B.1.617.2, as well as certain B.1.1.7 clusters (amongst other variants of interest or contern). S:K417N is a spike protein mutation, also linked to increased binding affinity for ACE2, as well as potential immune escape by reducing the effectiveness of monoclonal antibodies. S:K417N has been linked to B.1.617.2, commonly now known as the delta+ variant.
+
+You discover that the B.1.617.2 cluster with a logistic growth rate of 0.28 has the S:K417N mutation in majority of the sequences in the cluster. You additionally discover that the B.1.1.7 cluster with a logistic growth rate of 0.27 has the S:L452R mutation present in majority of sequences in the cluster. 
+
+**Questions to consider and discuss with your classmates:**
+
+What do you suggest PHE should do in response to both of these clusters? Although neither appear to have currently high growth rates compared to other clusters of the same lineage, discuss with your classmates the best approach to monitoring these clusters and regions where they are present. Think about whether you would expect a higher rate of vaccine breakthrough in these clusters. What data would you need to monitor this occurence? It is not as simple as just vaccinated or not vaccinated....
+
+
+
+### Writing the report 
+
+When writing your situation report, consider which information you found most useful in assessing the present scanner outputs. Include a few figures which clearly support your results from the scanning tool, in terms of clusters with high growth rates, and which clusters you think PHE should focus on monitoring more carefully (e.g. lineage type or specific clusters? regions of interest?). Be sure to discuss sampling methods, as well as time period from which samples were used in the scanner run, as this is key to understanding how randomly sampled the sequences were from a given population. 
 
 
 
