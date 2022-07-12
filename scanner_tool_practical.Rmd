@@ -140,10 +140,7 @@ ggplotly(p2)
 
 Returning to the outputs from our most recent scanner run, we can further look at growth over time and space, using geographically matched growth rate estimates (using a generalised additive model, GAM, combined with a Gaussian markov random field model). Don't worry too much about the statistics, the main focus here is to identify where growth is occurring. 
 
-In this case, we use a region level designated in the UK as lower tier local authority (LTLA). By using the previously described predictive model to estimate spatial growth across smaller regions, we can help inform NHS test and trace (the UK's testing and contact tracing service) where to increase testing initiatives, as well as help UKHSA identify regions of concern for transmission. Color represents relative growth per generation. 
-
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+In this case, we use a region level designated in the UK as lower tier local authority (LTLA). By using the previously described predictive model to estimate spatial growth across smaller regions, we can help inform NHS test and trace (the UK's testing and contact tracing service) where to increase testing initiatives, as well as help UKHSA identify regions of concern for transmission. 
 
 We look at the top 3 growth clusters for B.1.1.7 and B.1.617.2, respectively, excluding samples where the most recent sample date is earlier than 01/05/2021. Table 2 shows a recap of these clusters, including cluster size, most recent sample date, least recent sample date, and logistic growth rate from scanner output. 
 
